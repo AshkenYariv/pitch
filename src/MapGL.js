@@ -5,9 +5,9 @@ const MapGL = () => {
 
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [lng, setLng] = useState(34.8300);
-    const [lat, setLat] = useState(32.1012);
-    const [zoom, setZoom] = useState(11);
+    const [lng, setLng] = useState(34.7835);
+    const [lat, setLat] = useState(32.0733);
+    const [zoom, setZoom] = useState(11.75);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once

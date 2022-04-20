@@ -1,4 +1,5 @@
 import BlogList from './BlogList';
+import MapGL from './MapGL';
 import useFetch from './useFetch';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';

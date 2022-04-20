@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import Navbar from './Navbar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Navbar from './Navbar';
 import MapGL from './MapGL';
+import Home from './Home'
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFyaXZhc2hrZW5henkiLCJhIjoiY2wxd2x2dXpuMDZ6bjNjcDhxNHJpODU3ciJ9.wJrxwloDiZyGmA6QGzh3Sw';
 
@@ -34,10 +36,14 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiamFyaXZhc2hrZW5henkiLCJhIjoiY2wxd2x2dXpuMDZ6b
 
 const App = () => {
     return (
-        <div>
+        <div className='App'>
             <Navbar />
-            <MapGL />
+            <div className="content">
+                <Home />
+                <MapGL />
+            </div>
         </div>
+            
     );
 }
    
