@@ -1,8 +1,8 @@
 {
     "fields": [
         {
-            "name": "מגרש אימונים - קרית שלום",
-            "address": "רח' מכבי 100",
+            "name": "Field Name",
+            "address": "Street Name",
             "coordinates": [
                 32.004984,
                 34.776558

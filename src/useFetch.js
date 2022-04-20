@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useFetch = (url) => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
     const [isPanding, setIsPanding] = useState(true)
     const [error, setError] = useState(null)
 
@@ -33,6 +33,10 @@ const useFetch = (url) => {
 
         return () => abortCont.abort()
     }, [url])
+
+    console.log('In fetch')
+    console.log(data)
+
 
     return { data, isPanding, error }
 }

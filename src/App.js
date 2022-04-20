@@ -40,7 +40,7 @@ const App = () => {
             <Navbar />
             <div className="content">
                 <Home />
-                <MapGL />
+                {/* <MapGL /> */}
             </div>
         </div>
             
