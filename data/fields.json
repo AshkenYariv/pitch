@@ -1,8 +1,16 @@
 {
     "fields": [
         {
-            "name": "Field Name",
-            "address": "Street Name",
+            "name": "Blumfield",
+            "address": "Yaffo 101, TLV",
+            "coordinates": [
+                32.004984,
+                34.776558
+            ]
+        },
+        {
+            "name": "Kiryat Shalom",
+            "address": "South, TLV",
             "coordinates": [
                 32.004984,
                 34.776558

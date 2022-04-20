@@ -8,7 +8,7 @@ const Navbar = () => {
                 <h2>מגרשים</h2>
                 <h2>הוספת מגרש</h2>
             </div>
-            <img src={logo} alt="logo of company"/>
+            <img src={logo} alt="logo of company" className="pitch-logo"/>
         </nav>
     );
 }

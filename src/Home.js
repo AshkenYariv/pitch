@@ -5,7 +5,7 @@ import { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 
 const Home = () => {
-    const { data, isPanding, error } = useFetch('http://localhost:8000/db')
+    const { data, isPanding, error } = useFetch('http://localhost:8000/fields')
 
     const [title, setTitle] = useState('')
     const [city, setCity] = useState('')
@@ -20,7 +20,6 @@ const Home = () => {
         <div className="home">
             <div className="search-bar">
                 <form>
-                    <label>בחר עיר</label>
                     {!isPending && <button>חפש</button>}
                     {isPending && <button disabled>...מחפש</button>}
                     <select value={city}
@@ -32,10 +31,14 @@ const Home = () => {
                 </form>
             </div>
           
-            <div className='homepage-text'>{error && <div>{error}</div>}</div>
-            <div className='homepage-text'>{isPanding && <div>...טוען</div>}</div>
-            <div className='homepage-text'>{data && <BlogList fields={data} title='מגרשים' />}</div>
+            <div className='homepage-text'>
+                {error && <div>{error}</div>}
+                {isPanding && <div>...טוען</div>}
+                {data && <BlogList fields={data} title='מגרשים' />}
+            </div>
+
             <div className='homepage-map'><MapGL /></div>
+
         </div>
      );
 }

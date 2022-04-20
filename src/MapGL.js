@@ -5,9 +5,9 @@ const MapGL = () => {
 
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [lng, setLng] = useState(34.7835);
-    const [lat, setLat] = useState(32.0733);
-    const [zoom, setZoom] = useState(11.75);
+    const [lng, setLng] = useState(34.7838);
+    const [lat, setLat] = useState(32.0711);
+    const [zoom, setZoom] = useState(12.10);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -30,9 +30,9 @@ const MapGL = () => {
 
     return ( 
         <mapgl className="mapGl">
-            <div className="sidebar">
+            {/* <div className="sidebar">
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div>
+            </div> */}
             <div ref={mapContainer} className="map-container" />
         </mapgl>
      );
