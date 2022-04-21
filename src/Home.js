@@ -5,16 +5,13 @@ import { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 
 const Home = () => {
-    const { data, isPanding, error } = useFetch('http://localhost:8000/fields')
+    const { data: fields, isPanding, error } = useFetch('http://localhost:8000/fields')
 
     const [title, setTitle] = useState('')
     const [city, setCity] = useState('')
     const [author, setAuthor] = useState('mario')
     const [isPending, setIsPending] = useState(false)
     // const history = useHistory()
-    console.log('In home')
-    console.log({ data
-})
 
     return ( 
         <div className="home">
@@ -34,10 +31,12 @@ const Home = () => {
             <div className='homepage-text'>
                 {error && <div>{error}</div>}
                 {isPanding && <div>...טוען</div>}
-                {data && <BlogList fields={data} title='מגרשים' />}
+                {fields && <BlogList fields={fields} title='מגרשים' />}
             </div>
 
-            <div className='homepage-map'><MapGL /></div>
+            <div className='homepage-map'>
+                {fields && <MapGL fields={fields} />}
+            </div>
 
         </div>
      );

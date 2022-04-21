@@ -5,6 +5,8 @@ const useFetch = (url) => {
     const [isPanding, setIsPanding] = useState(true)
     const [error, setError] = useState(null)
 
+console.log('Fetch Started')
+
     useEffect(() => {
         const abortCont = new AbortController()
 
@@ -34,9 +36,7 @@ const useFetch = (url) => {
         return () => abortCont.abort()
     }, [url])
 
-    console.log('In fetch')
-    console.log(data)
-
+    console.log('Fetch Complete')
 
     return { data, isPanding, error }
 }

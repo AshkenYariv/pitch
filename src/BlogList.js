@@ -5,10 +5,10 @@ const BlogList = ({ fields, title}) => {
     return ( 
         <div className="blog-list">
             <h2>{title}</h2>
-            {fields.map((blog) => (
+            {fields.map((field) => (
                 <div className="blog-preview" >
-                    <h2>{blog.name}</h2>
-                    <p>{blog.address}</p>
+                    <h2>{field.name}</h2>
+                    <p>{field.address}</p>
                     {/* <Link to={ `/blogs/${blog.id}` }>
                         <h2>{blog.name}</h2>
                         <p>{blog.address}</p>

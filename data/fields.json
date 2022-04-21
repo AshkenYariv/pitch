@@ -4,16 +4,17 @@
             "name": "Blumfield",
             "address": "Yaffo 101, TLV",
             "coordinates": [
-                32.004984,
-                34.776558
+                34.7838,
+                32.0711
+                
             ]
         },
         {
             "name": "Kiryat Shalom",
             "address": "South, TLV",
             "coordinates": [
-                32.004984,
-                34.776558
+                34.7763,
+                32.08
             ]
         }
     ]
