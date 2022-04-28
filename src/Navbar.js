@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom'
 import logo from './resources/pitch_logo.png'
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
 const Navbar = () => {
     return (  
         <nav className="navbar">
             <div className="links">
-                <h2>מגרשים</h2>
-                <h2>הוספת מגרש</h2>
+                <nav>
+                    <Link to="/">מגרשים</Link>
+                    <Link to="/add_field">הוספת מגרש</Link>
+                </nav>
             </div>
-            <img src={logo} alt="logo of company" className="pitch-logo"/>
+            <Link to="/">
+                <img src={logo} alt="logo of company" className="pitch-logo" />
+            </Link>
         </nav>
     );
 }

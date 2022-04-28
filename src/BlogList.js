@@ -7,13 +7,10 @@ const BlogList = ({ fields, title}) => {
             <h2>{title}</h2>
             {fields.map((field) => (
                 <div className="blog-preview" >
-                    <h2>{field.name}</h2>
-                    <p>{field.address}</p>
-                    {/* <Link to={ `/blogs/${blog.id}` }>
-                        <h2>{blog.name}</h2>
-                        <p>{blog.address}</p>
-                    </Link> */}
-                    
+                    <Link to={`/detailed_field/${field.id}`}>
+                        <h2>{field.name}</h2>
+                        <p>{field.address}</p>
+                    </Link>
                 </div>
             ))}
         </div>

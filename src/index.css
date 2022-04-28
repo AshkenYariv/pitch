@@ -104,14 +104,23 @@
     color: #16e5de;
     margin-bottom: 10px;
 }
-.blog-details div {
+.blog-details {
+    /* background-color: purple; */
     margin: 20px 0;
+    padding: 3vh;
+    text-align: right;
+    width: 100%;
+    float: right;
+    height: 65vh;
+    margin-left: 5px;
+    margin-right: 70px;
 }
 .blog-details button {
     background: #16e5de;
     color: #fff;
     border: 0;
     padding: 8px;
+    margin-top: 3vh;
     border-radius: 8px;
     cursor: pointer;
 }
@@ -156,10 +165,9 @@
     box-shadow: 1px 2px 4px rgba(127, 127, 127, 0.1);;
     max-width: 100%;
     padding: 3px;
-    margin-bottom: 20px;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: -25px;
     border-radius: 10px;
 }
 .search-bar select {
@@ -198,7 +206,7 @@
 
 /* pitch logo */
 .pitch-logo {
-    height: 120px;
-    width: 175px;
-    margin: -15px;
+    height: 100px;
+    width: 155px;
+    margin: -25px;
 }

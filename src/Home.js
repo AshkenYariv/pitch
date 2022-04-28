@@ -2,7 +2,6 @@ import BlogList from './BlogList';
 import MapGL from './MapGL';
 import useFetch from './useFetch';
 import { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 
 const Home = () => {
     const { data: fields, isPanding, error } = useFetch('http://localhost:8000/fields')
@@ -11,6 +10,7 @@ const Home = () => {
     const [city, setCity] = useState('')
     const [author, setAuthor] = useState('mario')
     const [isPending, setIsPending] = useState(false)
+    const [searchTerm, setSearchTerm] = useState('all')
     // const history = useHistory()
 
     return ( 

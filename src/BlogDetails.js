@@ -1,30 +1,37 @@
-import { useHistory, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
+import {useParams, useNavigate } from 'react-router-dom'
 
 const BlogDetails = () => {
     const { id } = useParams()
-    const { data: blog, isPanding, error } = useFetch('http://localhost:8000/blogs/' + id)
-    const history = useHistory()
+    const { data: field, isPanding, error } = useFetch('http://localhost:8000/fields/' + id)
+    const navigate = useNavigate()
+    // const history = useHistory()
     
-    const handleClick = () => {
-        fetch('http://localhost:8000/blogs/' + blog.id, {
-            method: 'DELETE'
-        }).then(() => {
-            history.push('/')
-        })
+    // const handleDeleteClick = () => {
+    //     fetch('http://localhost:8000/blogs/' + blog.id, {
+    //         method: 'DELETE'
+    //     }).then(() => {
+    //         history.push('/')
+    //     })
+    // }
+
+    const handleHomeClick = () => {
+        navigate("/")
     }
 
     return ( 
         <div className="blog-details">
-            { isPanding && <div>Loading...</div> }
+            { isPanding && <div>טוען...</div> }
             { error && <div>{ error }</div> }
-            { blog && (
-                <article>
-                    <h2>{ blog.title }</h2>
-                    <p>Written by { blog.author }</p>
-                    <div>{ blog.body }</div>
-                    <button onClick={handleClick}>delete</button>
-                </article>
+            {field && (
+                <field>
+                    <h2>{ field.name }</h2>
+                    <p>כתובת {field.address }</p>
+                    <br />
+                    <div> לכתוב בוייז מה שצריך</div>
+                    <button onClick={handleHomeClick}>חזור למגרשים</button>
+                    {/* <button onClick={handleDeleteClick}>delete</button> */}
+                </field>
             ) }
         </div>
      );

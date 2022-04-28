@@ -1,81 +1,31 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import Navbar from './Navbar';
-import MapGL from './MapGL';
 import Home from './Home'
+import Create from './Create'
+import BlogDetails from './BlogDetails';
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFyaXZhc2hrZW5henkiLCJhIjoiY2wxd2x2dXpuMDZ6bjNjcDhxNHJpODU3ciJ9.wJrxwloDiZyGmA6QGzh3Sw';
 
-// export default function App() {
-//     const mapContainer = useRef(null);
-//     const map = useRef(null);
-//     const [lng, setLng] = useState(34.8777);
-//     const [lat, setLat] = useState(32.1079);
-//     const [zoom, setZoom] = useState(10.5);
-
-//     useEffect(() => {
-//         if (map.current) return; // initialize map only once
-//         map.current = new mapboxgl.Map({
-//             container: mapContainer.current,
-//             style: 'mapbox://styles/mapbox/streets-v11',
-//             center: [lng, lat],
-//             zoom: zoom
-//         });
-//     });
-
-//     useEffect(() => {
-//         if (!map.current) return; // wait for map to initialize
-//         map.current.on('move', () => {
-//             setLng(map.current.getCenter().lng.toFixed(4));
-//             setLat(map.current.getCenter().lat.toFixed(4));
-//             setZoom(map.current.getZoom().toFixed(2));
-//         });
-//     });
-
 const App = () => {
     return (
         <div className='App'>
-            <Navbar />
-            <div className="content">
-                <Home />
-                {/* <MapGL /> */}
-            </div>
+            <Router>
+                <Navbar />
+                <div className="content">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/add_field" element={<Create />} />
+                        <Route path="/detailed_field/:id" element={<BlogDetails />} />
+                        <Route path="*" element={<Home />} />
+                    </Routes>
+                </div>
+            </Router>
         </div>
             
     );
 }
    
-        
-
-        //     <Router>
-        //         <div className="App">
-        //             <Navbar />
-        //             <div className="content">
-        //                 <Switch>
-        //                     <Route exact path='/'>
-        //                         <Home />
-        //                     </Route>
-        //                     <Route exact path='/create'>
-        //                         <Create />
-        //                     </Route>
-        //                     <Route exact path='/blogs/:id'>
-        //                         <BlogDetails />
-        //                     </Route>
-        //                     <Route path='*'>
-        //                         <NotFound />
-        //                     </Route>
-        //                 </Switch>
-        //             </div>
-        //         </div>
-        //     </Router>
-
-        // <div>
-        //     <div className="sidebar">
-        //         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-        //     </div>
-        //     <div ref={mapContainer} className="map-container" />
-        // </div>
-
 export default App;

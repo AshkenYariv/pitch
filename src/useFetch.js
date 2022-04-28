@@ -31,7 +31,7 @@ console.log('Fetch Started')
                         setError(err.message)
                     }
                 })
-        }, 1000)
+        }, 100)
 
         return () => abortCont.abort()
     }, [url])
