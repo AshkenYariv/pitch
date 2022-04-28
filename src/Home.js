@@ -21,8 +21,10 @@ const Home = () => {
                     {isPending && <button disabled>...מחפש</button>}
                     <select value={city}
                         onChange={(e) => setCity(e.target.value)}>
+                        <option value='all'>בחר עיר</option>
                         <option value='tel-aviv'>תל אביב</option>
-                        <option value='other'>אחר</option>
+                        <option value='herzliya'>הרצליה</option>
+                        
                     </select>
 
                 </form>
