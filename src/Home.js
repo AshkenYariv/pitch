@@ -2,15 +2,15 @@ import BlogList from './BlogList';
 import MapGL from './MapGL';
 import useFetch from './useFetch';
 import { useState } from 'react';
+import Select from 'react-select'
 
 const Home = () => {
     const { data: fields, isPanding, error } = useFetch('http://localhost:8000/fields')
 
     const [title, setTitle] = useState('')
-    const [city, setCity] = useState('')
+    const [city, setCity] = useState('all')
     const [author, setAuthor] = useState('mario')
     const [isPending, setIsPending] = useState(false)
-    const [searchTerm, setSearchTerm] = useState('all')
     // const history = useHistory()
 
     return ( 
@@ -19,12 +19,12 @@ const Home = () => {
                 <form>
                     {!isPending && <button>חפש</button>}
                     {isPending && <button disabled>...מחפש</button>}
+
                     <select value={city}
                         onChange={(e) => setCity(e.target.value)}>
                         <option value='all'>בחר עיר</option>
                         <option value='tel-aviv'>תל אביב</option>
                         <option value='herzliya'>הרצליה</option>
-                        
                     </select>
 
                 </form>
@@ -33,7 +33,7 @@ const Home = () => {
             <div className='homepage-text'>
                 {error && <div>{error}</div>}
                 {isPanding && <div>...טוען</div>}
-                {fields && <BlogList fields={fields} title='מגרשים' />}
+                {fields && <BlogList fields={fields.filter((field) => city === 'all' || field.city === city)} title='מגרשים' />}
             </div>
 
             <div className='homepage-map'>
