@@ -3,24 +3,42 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 
 const MapGL = ({fields}) => {
 
-    const mapContainer = useRef(null);
-    const [lng, setLng] = useState(34.7838);
-    const [lat, setLat] = useState(32.0711);
-    const [zoom, setZoom] = useState(12.10);
-    const mapGl = useRef(null);
-    const [marker, setMarker] = useState([,])
+    const mapContainer = useRef(null)
+    const [lng, setLng] = useState(34.7838)
+    const [lat, setLat] = useState(32.0711)
+    const [zoom, setZoom] = useState(12.10)
+    const mapGl = useRef(null)
 
     useEffect(() => {
+        
         if (mapGl.current) return; // initialize map only once
-        mapGl.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [lng, lat],
-            zoom: zoom
-        });
-        fields.map((field) =>
-            new mapboxgl.Marker().setLngLat(field.coordinates).addTo(mapGl.current)
-        );
+        // this is overly complicated! Loads diffrent maps according to if 
+        // wanting to center in a single location or in a general location
+        if (Array.isArray(fields)) {
+            mapGl.current = new mapboxgl.Map({
+                container: mapContainer.current,
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [lng, lat],
+                zoom: zoom
+            });
+        } else { 
+            mapGl.current = new mapboxgl.Map({
+                container: mapContainer.current,
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [fields.coordinates[0], fields.coordinates[1]],
+                zoom: zoom
+            })
+        }
+        if (Array.isArray(fields)) {
+            fields.map((field) =>
+                new mapboxgl.Marker().setLngLat(field.coordinates).addTo(mapGl.current)
+            );
+        } else {
+            new mapboxgl.Marker().setLngLat(fields.coordinates).addTo(mapGl.current)
+            setLng({ lng: fields.coordinates[1] })
+            setLat({ lat: fields.coordinates[0] })
+        }
+        
     });
 
     useEffect(() => {
@@ -34,9 +52,6 @@ const MapGL = ({fields}) => {
 
     return ( 
         <mapgl className="mapGl">
-            {/* <div className="sidebar">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div> */}
             <div ref={mapContainer} className="map-container" />
         </mapgl>
      );

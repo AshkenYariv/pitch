@@ -1,5 +1,6 @@
 import useFetch from "./useFetch";
 import {useParams, useNavigate } from 'react-router-dom'
+import MapGL from './MapGL';
 
 const BlogDetails = () => {
     const { id } = useParams()
@@ -21,18 +22,24 @@ const BlogDetails = () => {
 
     return ( 
         <div className="blog-details">
-            { isPanding && <div>טוען...</div> }
-            { error && <div>{ error }</div> }
-            {field && (
-                <field>
-                    <h2>{ field.name }</h2>
-                    <p>כתובת {field.address }</p>
-                    <br />
-                    <div> לכתוב בוייז מה שצריך</div>
-                    <button onClick={handleHomeClick}>חזור למגרשים</button>
-                    {/* <button onClick={handleDeleteClick}>delete</button> */}
-                </field>
-            ) }
+            <div className="blog-details-text">
+                { isPanding && <div>טוען...</div> }
+                { error && <div>{ error }</div> }
+                {field && (
+                    <field>
+                        <h2>{ field.name }</h2>
+                        <p>כתובת {field.address }</p>
+                        <br />
+                        <div> לכתוב בוייז מה שצריך</div>
+                        <button onClick={handleHomeClick}>חזור למגרשים</button>
+                        {/* <button onClick={handleDeleteClick}>delete</button> // THIS DOESN'T WORK YET! */}
+                    </field>
+                ) }
+            </div>
+
+            <div className='blog-details-map'>
+                {field && <MapGL fields={field} />}
+            </div>
         </div>
      );
 }
