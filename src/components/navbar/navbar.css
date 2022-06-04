@@ -26,3 +26,10 @@
 .navbar a:hover {
     color: rgb(122, 122, 122)
 }
+
+/* pitch logo */
+.pitch-logo {
+    height: 100px;
+    width: 155px;
+    margin: -25px;
+}
