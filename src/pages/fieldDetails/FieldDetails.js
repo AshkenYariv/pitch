@@ -32,6 +32,7 @@ const FieldDetails = () => {
     const handleHomeClick = () => {
         navigate("/")
     }
+
     function orderField(e) {
         e.preventDefault();
         var templateParams = {
@@ -63,9 +64,14 @@ const FieldDetails = () => {
                 {field && (
                     <field>
                         <h2>{field.name}</h2>
-                        <p>כתובת {field.address}</p>
+                        <p><u>:כתובת</u></p>
+                        <p>{field.address}</p>
                         <br />
-                        <div> לכתוב בוייז מה שצריך</div>
+                        <p><u>:שעות פעילות</u></p>
+                        <p>{field.openingHours.map((item, index) => {
+                            return <p>{item} מחיר: {field.price[index]} ש"ח</p>
+                        })}</p>
+                        <br />
                         <form ref={form} onSubmit={orderField} id="reserve_field">
                             <input type="date" defaultValue={currentDate} id="datePicker" name="datePicker"
                                 onChange={(event) => setUserDate(event.target.value)} />
