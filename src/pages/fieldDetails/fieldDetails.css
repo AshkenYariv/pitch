@@ -1,0 +1,74 @@
+/* field lists */
+.field-list h2 {
+    font-size: 25px;
+}
+
+/* field previews / list */
+.field-preview {
+    padding: 10px 16px;
+    margin: 20px 0;
+    border-bottom: 1px solid #fafafa;
+    box-shadow: 1px 2px 4px rgba(127, 127, 127, 0.1);
+}
+.field-preview:hover {
+    box-shadow: 1.5px 3.5px 5.5px rgba(0, 0, 0, 0.1);
+}
+.field-preview h2 {
+    font-size: 20px;
+    color: #16e5de;
+    margin-bottom: 8px;
+}
+.field-preview a {
+    text-decoration: none;
+}
+
+/* field details page */
+.field-details h2 {
+
+    font-size: 20px;
+    color: #16e5de;
+    margin-bottom: 10px;
+}
+.field-details {
+    /* background-color: purple; */
+    margin: 0px 0;
+    padding: 3vh;
+    text-align: right;
+    width: 100%;
+    float: right;
+    height: 65vh;
+    margin-left: 5px;
+    margin-right: 70px;
+}
+/* home styles */
+.field-details-text {
+    /* background-color: red; */
+    color: #333;
+    font-size: 20px;
+    font-family: 'Rubik',
+        sans-serif;
+    text-align: right;
+    width: 35%;
+    float: right;
+    height: 65vh;
+    margin-left: 5px;
+    margin-right: 70px;
+}
+.field-details button {
+    background: #16e5de;
+    color: #fff;
+    border: 0;
+    padding: 8px;
+    margin-top: 3vh;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Map GL - blogDetails*/
+.field-details-map {
+    /* background-color: blue; */
+    width: 48%;
+    float: left;
+    height: 70vh;
+    margin-right: 5px;
+}

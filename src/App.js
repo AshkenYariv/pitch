@@ -1,10 +1,8 @@
 import React from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import Navbar from './Navbar';
-import Home from './Home'
-import Create from './Create'
-import BlogDetails from './BlogDetails';
+import { Navbar } from './components';
+import {Home,Create,FieldDetails,NotFound} from './pages';
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFyaXZhc2hrZW5henkiLCJhIjoiY2wxd2x2dXpuMDZ6bjNjcDhxNHJpODU3ciJ9.wJrxwloDiZyGmA6QGzh3Sw';
@@ -18,7 +16,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/add_field" element={<Create />} />
-                        <Route path="/detailed_field/:id" element={<BlogDetails />} />
+                        <Route path="/detailed_field/:id" element={<FieldDetails />} />
                         <Route path="*" element={<Home />} />
                     </Routes>
                 </div>
