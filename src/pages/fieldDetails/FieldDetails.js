@@ -34,7 +34,6 @@ const FieldDetails = () => {
     }
     function orderField(e) {
         e.preventDefault();
-        alert(e);
         var templateParams = {
             from_name: user.name,
             field_name: field.name,
@@ -46,7 +45,6 @@ const FieldDetails = () => {
 
 
         };
-        alert(templateParams);
         emailjs.send('service_k630q6m', 'template_fts276l',templateParams ,'guDHMPICwhsH6_B9W')
             .then((result) => {
                 console.log(result.text);
