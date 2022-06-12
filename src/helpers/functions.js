@@ -6,3 +6,14 @@ export function getCurrentDate() {
 
     return date;
 }
+
+export const validatePassword = (password, confirmPassword) => {
+    let isValid = true
+    if (password !== '' && confirmPassword !== '') {
+        if (password !== confirmPassword) {
+            isValid = false
+            alert('Passwords does not match')
+        }
+    }
+    return isValid
+}
