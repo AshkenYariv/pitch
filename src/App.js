@@ -11,15 +11,22 @@ const App = () => {
     return (
         <div className='App'>
             <Router>
-                <Navbar />
-                <div className="content">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/add_field" element={<Create />} />
-                        <Route path="/detailed_field/:id" element={<FieldDetails />} />
-                        <Route path="*" element={<Home />} />
-                    </Routes>
-                </div>
+                {/* <AuthProvider value={{ currentUser }} > */}
+                    {/* { currentUser ? */}
+                    {/* <div> */}
+                        <Navbar />
+                        <div className="content">
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/add_field" element={<Create />} />
+                                <Route path="/detailed_field/:id" element={<FieldDetails />} />
+                                <Route path="*" element={<Home />} />
+                            </Routes>
+                        </div>                   
+                    {/* </div> : */}
+                    {/* <Login /> */}
+                    {/* } */}
+                {/* </AuthProvider> */}
             </Router>
         </div>
             
