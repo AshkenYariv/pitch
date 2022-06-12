@@ -9,7 +9,7 @@ import emailjs from 'emailjs-com';
 const FieldDetails = () => {
     const { id } = useParams()
     const { data: field, isPanding, error } = useFetch('http://localhost:8000/fields/' + id)
-    const user = {
+    const user = { //TODO: get user from db
         name: 'peleg',
         phone: '0526755240'
     }
@@ -43,9 +43,10 @@ const FieldDetails = () => {
             duration: '',
             user_number: user.phone,
             field_number: field.phone
-        };
 
-        emailjs.sendForm('service_k630q6m', 'template_fts276l',templateParams,'guDHMPICwhsH6_B9W')
+
+        };
+        emailjs.send('service_k630q6m', 'template_fts276l',templateParams ,'guDHMPICwhsH6_B9W')
             .then((result) => {
                 console.log(result.text);
             }, (error) => {
@@ -72,9 +73,9 @@ const FieldDetails = () => {
                         })}</p>
                         <br />
                         <form ref={form} onSubmit={orderField} id="reserve_field">
-                            <input type="date" defaultValue={currentDate} id="datePicker" name="date"
+                            <input type="date" defaultValue={currentDate} id="datePicker" name="datePicker"
                                 onChange={(event) => setUserDate(event.target.value)} />
-                            <input type="time"  step="300"  id="timePicker" name="time"
+                            <input type="time"  step="300"  id="timePicker" name="timePicker"
                                 onChange={(event) => setUserTime(event.target.value)} />
 
                             <button type="submit"  value="Submit" >הזמן מגרש</button>
