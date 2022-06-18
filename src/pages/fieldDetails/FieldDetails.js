@@ -1,4 +1,3 @@
-import useFetch from "../../helpers/useFetch";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useRef } from "react";
 import { MapGL } from "../../components";
@@ -15,7 +14,6 @@ const FieldDetails = () => {
     const _WEEKDAYS = ['א','ב','ג','ד','ה','ו','ש'];
 
 
-    //const { data: field, isPanding, error } = useFetch('http://localhost:8000/fields/' + id)
     const user = {
         name: 'peleg',
         phone: '0526755240'
@@ -62,10 +60,6 @@ const FieldDetails = () => {
 
         e.target.reset();
     }
-
-    // <div>
-    //        {field.name}
-    //     </div>
     return (
 
         <div className="field-details">
