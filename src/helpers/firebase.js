@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
+
 import {
     getAuth, createUserWithEmailAndPassword,
     signInWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification
@@ -21,6 +22,7 @@ initializeApp(firebaseConfig);
 
 //init services
 const db = getFirestore();
+export {db}
 const auth = getAuth();
 export { auth }
 //collection ref
@@ -30,21 +32,23 @@ const fieldRef = collection(db, 'fields');
 
 //get collection data
 export function getFields() {
-
     getDocs(fieldRef).then((snapshot) => {
         let fields = [];
         snapshot.docs.forEach((doc) => {
             fields.push({ ...doc.data(), id: doc.id })
         })
         console.log(fields)
+        return fields
     }).catch(err => {
         console.log(err)
     });
 }
 
 
-//signUp users
 
+
+
+//signUp user
 export function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password).then((cred) => {
         //console.log('user logged in:', cred.user)
@@ -53,7 +57,7 @@ export function signUp(email, password) {
     })
 }
 
-//login users
+//login user
 export function logIn(email, password) {
     signInWithEmailAndPassword(auth, email, password).then((cred) => {
         //console.log('user logged in:', cred.user)
@@ -62,7 +66,7 @@ export function logIn(email, password) {
     })
 
 }
-
+//logout user
 export function logOut() {
     signOut(auth).then(() => {
         //console.log('the user signed out');
@@ -71,7 +75,7 @@ export function logOut() {
     })
 }
 
-
+//listen to auth changes
 onAuthStateChanged(auth, (user) => {
     console.log('user status changed: ', user)
 })

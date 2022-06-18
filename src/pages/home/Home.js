@@ -1,21 +1,38 @@
 import BlogList from './BlogList';
 import { MapGL } from '../../components';
 import useFetch from '../../helpers/useFetch';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './home.css';
+import { getFields } from '../../helpers/firebase';
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
+import { db } from '../../helpers/firebase';
+import useFetchFirestore from '../../helpers/useFetchFirestore';
+
+
 
 
 const Home = () => {
-    const { data: fields, isPanding, error } = useFetch('http://localhost:8000/fields')
+   const { data: fields, isPanding, errortmp } = useFetch('http://localhost:8000/fields')
+    const { data: fields2, isPending, error } = useFetchFirestore()
 
     const [title, setTitle] = useState('')
     const [city, setCity] = useState('all')
     const [author, setAuthor] = useState('mario')
-    const [isPending, setIsPending] = useState(false)
     // const history = useHistory()
 
-    return ( 
+    //TODO: need to think if should be at a different page like useFetch
+    // useEffect(() => {
+    //     const q = query(collection(db, 'fields'), orderBy('name', 'desc'))
+    //     onSnapshot(q, (querySnapshot) => {
+    //         setFields(querySnapshot.docs.map(doc => ({
+    //             id: doc.id,
+    //             data: doc.data()
+    //         })))
+    //     })
+    // }, [])
+
+    return (
         <div className="home">
             <div className="search-bar">
                 <form>
@@ -31,11 +48,16 @@ const Home = () => {
 
                 </form>
             </div>
-          
+            {fields2 && fields2.map((field) => (
+                <div key={fields2.id}>{field.data.phone} </div>
+            ))}
+            {error && <div>{error}</div>}
+            {isPending && <div>...טוען</div>}
             <div className='homepage-text'>
                 {error && <div>{error}</div>}
-                {isPanding && <div>...טוען</div>}
-                {fields && <BlogList fields={fields.filter((field) => city === 'all' || field.city === city)} title='מגרשים' />}
+                {isPending && <div>...טוען</div>}
+                {fields2 && <BlogList fields={fields2} title='מגרשים' />}
+                {/* {fields && <BlogList fields={fields.filter((field) => city === 'all' || field.data.city === city)} title='מגרשים' />} */}
             </div>
 
             <div className='homepage-map'>
@@ -43,7 +65,7 @@ const Home = () => {
             </div>
 
         </div>
-     );
+    );
 }
- 
+
 export default Home;
