@@ -15,7 +15,6 @@ const MapGL = ({ fields }) => {
         // this is overly complicated! Loads diffrent maps according to if 
         // wanting to center in a single location or in a general location
         if (Array.isArray(fields)) {
-            console.log("1111111111111111111111111111111111")
             mapGl.current = new mapboxgl.Map({
                 container: mapContainer.current,
                 style: 'mapbox://styles/mapbox/streets-v11',
@@ -23,7 +22,6 @@ const MapGL = ({ fields }) => {
                 zoom: zoom
             });
         } else {
-            console.log("else1111111111111111111111111111111111")
             mapGl.current = new mapboxgl.Map({
                 container: mapContainer.current,
                 style: 'mapbox://styles/mapbox/streets-v11',
@@ -32,17 +30,11 @@ const MapGL = ({ fields }) => {
             })
         }
         if (Array.isArray(fields)) {
-            console.log("222222222222222222222222222222222222222")
             fields.map((field) => {
-                console.log(field)
-                console.log(field.data.coordinates._lat)
                 new mapboxgl.Marker().setLngLat([field.data.coordinates._lat,field.data.coordinates._long]).addTo(mapGl.current)
             }
             );
         } else {
-            console.log("else222222222222222222222222222222222222222")
-            console.log(fields.coordinates._long)
-            console.log(fields.coordinates._lat)
             new mapboxgl.Marker().setLngLat([fields.coordinates._lat,fields.coordinates._long]).addTo(mapGl.current)
             setLng({ lng: fields.coordinates._long })
             setLat({ lat: fields.coordinates._lat })
