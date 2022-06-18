@@ -12,6 +12,7 @@ const FieldDetails = () => {
     const { id } = useParams()
     const location = useLocation()
     const { field } = location.state
+    const _WEEKDAYS = ['א','ב','ג','ד','ה','ו','ש'];
 
 
     //const { data: field, isPanding, error } = useFetch('http://localhost:8000/fields/' + id)
@@ -77,15 +78,17 @@ const FieldDetails = () => {
                         <p>{field.address}</p>
                         <br />
                         <p><u>:שעות פעילות</u></p>
-                        {field.openingHours.map((item) => {
-                            return (
-                                <div>
-                                    <p>שעת פתיחה: {item['openHour']}</p>
-                                    <p>שעת סגירה: {item['closeHour']}</p>
-                                    <p>מחיר: {item['price']}</p>
-                                </div>
-                            )
-                        })}
+                        <table className="openingHoursTable">
+                            {field.openingHours.map((item,i) => {
+                                return (
+                                    <tr>
+                                        <td>מחיר: {item['price']}</td>
+                                        <td>שעות פעילות: {item['openHour'] } - {item['closeHour'] }</td>
+                                        <td>:יום {_WEEKDAYS[i]} </td>
+                                    </tr>
+                                )
+                            })}
+                        </table>
                         <br />
                         <form ref={form} onSubmit={orderField} id="reserve_field">
                             <input type="date" defaultValue={currentDate} id="datePicker" name="date"
@@ -101,9 +104,9 @@ const FieldDetails = () => {
                 )}
             </div>
 
-            {/* <div className='field-details-map'>
-                 {field && <MapGL fields={field} />}
-         </div> */}
+            <div className='field-details-map'>
+                {field && <MapGL fields={field} />}
+            </div>
         </div>
     );
 }

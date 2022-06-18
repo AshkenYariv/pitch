@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import './mapGL.css';
-const MapGL = ({fields}) => {
+const MapGL = ({ fields }) => {
 
     const mapContainer = useRef(null)
     const [lng, setLng] = useState(34.7838)
@@ -10,35 +10,44 @@ const MapGL = ({fields}) => {
     const mapGl = useRef(null)
 
     useEffect(() => {
-        
+
         if (mapGl.current) return; // initialize map only once
         // this is overly complicated! Loads diffrent maps according to if 
         // wanting to center in a single location or in a general location
         if (Array.isArray(fields)) {
+            console.log("1111111111111111111111111111111111")
             mapGl.current = new mapboxgl.Map({
                 container: mapContainer.current,
                 style: 'mapbox://styles/mapbox/streets-v11',
                 center: [lng, lat],
                 zoom: zoom
             });
-        } else { 
+        } else {
+            console.log("else1111111111111111111111111111111111")
             mapGl.current = new mapboxgl.Map({
                 container: mapContainer.current,
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: [fields.coordinates[0], fields.coordinates[1]],
+                center: [fields.coordinates._lat, fields.coordinates._long],
                 zoom: zoom
             })
         }
         if (Array.isArray(fields)) {
-            fields.map((field) =>
-                new mapboxgl.Marker().setLngLat(field.coordinates).addTo(mapGl.current)
+            console.log("222222222222222222222222222222222222222")
+            fields.map((field) => {
+                console.log(field)
+                console.log(field.data.coordinates._lat)
+                new mapboxgl.Marker().setLngLat([field.data.coordinates._lat,field.data.coordinates._long]).addTo(mapGl.current)
+            }
             );
         } else {
-            new mapboxgl.Marker().setLngLat(fields.coordinates).addTo(mapGl.current)
-            setLng({ lng: fields.coordinates[1] })
-            setLat({ lat: fields.coordinates[0] })
+            console.log("else222222222222222222222222222222222222222")
+            console.log(fields.coordinates._long)
+            console.log(fields.coordinates._lat)
+            new mapboxgl.Marker().setLngLat([fields.coordinates._lat,fields.coordinates._long]).addTo(mapGl.current)
+            setLng({ lng: fields.coordinates._long })
+            setLat({ lat: fields.coordinates._lat })
         }
-        
+
     });
 
     useEffect(() => {
@@ -50,11 +59,11 @@ const MapGL = ({fields}) => {
         });
     });
 
-    return ( 
+    return (
         <mapgl className="mapGl">
             <div ref={mapContainer} className="map-container" />
         </mapgl>
-     );
+    );
 }
- 
+
 export default MapGL;

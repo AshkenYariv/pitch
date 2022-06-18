@@ -59,9 +59,9 @@ const Home = () => {
                 {fields2 && <BlogList fields={fields2} title='מגרשים' />}
                 {/* {fields && <BlogList fields={fields.filter((field) => city === 'all' || field.data.city === city)} title='מגרשים' />} */}
             </div>
-
+            {console.log(fields2)}
             <div className='homepage-map'>
-                {fields && <MapGL fields={fields} />}
+                {fields2 && <MapGL fields={fields2} />}
             </div>
 
         </div>

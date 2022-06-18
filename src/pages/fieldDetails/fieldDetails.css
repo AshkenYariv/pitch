@@ -40,6 +40,11 @@
     margin-left: 5px;
     margin-right: 70px;
 }
+
+/* Opening hours table */
+.openingHoursTable{
+    float: right;
+}
 /* home styles */
 .field-details-text {
     /* background-color: red; */
