@@ -1,13 +1,17 @@
 import BlogList from './BlogList';
 import { MapGL } from '../../components';
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import './home.css';
 import useFetchFirestore from '../../helpers/useFetchFirestore';
+import { unsubscribe } from '../../helpers/firebase';
 
 const Home = () => {
 //    const { data: fields, isPending, errortmp } = useFetch('http://localhost:8000/fields')
     const { data: fields, isPending, error } = useFetchFirestore()
     const [city, setCity] = useState('all')
+
+    
+
     return (
         <div className="home">
             <div className="search-bar">

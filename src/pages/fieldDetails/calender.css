@@ -1,0 +1,14 @@
+.hourOccupied{
+    background: red;
+    width: 20vw;
+    height: 5vh;
+    border-bottom: 1px solid black;
+}
+
+.hourFree{
+    background: green;
+    width: 20vw;
+    height: 5vh;
+    border-bottom: 1px solid black;
+
+}

@@ -5,13 +5,14 @@ import './fieldDetails.css';
 import { getCurrentDate } from "../../helpers/functions";
 import emailjs from 'emailjs-com';
 import { useLocation } from 'react-router-dom'
+import Calender from './calendar';
 
 
 const FieldDetails = () => {
     const { id } = useParams()
     const location = useLocation()
     const { field } = location.state
-    const _WEEKDAYS = ['א','ב','ג','ד','ה','ו','ש'];
+    const _WEEKDAYS = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
 
 
     const user = {
@@ -73,13 +74,15 @@ const FieldDetails = () => {
                         <br />
                         <p><u>:שעות פעילות</u></p>
                         <table className="openingHoursTable">
-                            {field.openingHours.map((item,i) => {
+                            {field.openingHours.map((item, i) => {
                                 return (
-                                    <tr>
-                                        <td>מחיר: {item['price']}</td>
-                                        <td>שעות פעילות: {item['openHour'] } - {item['closeHour'] }</td>
-                                        <td>:יום {_WEEKDAYS[i]} </td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td>מחיר: {item['price']}</td>
+                                            <td>שעות פעילות: {item['openHour']} - {item['closeHour']}</td>
+                                            <td>:יום {_WEEKDAYS[i]} </td>
+                                        </tr>
+                                    </tbody>
                                 )
                             })}
                         </table>
@@ -96,7 +99,9 @@ const FieldDetails = () => {
                         {/* <button onClick={handleDeleteClick}>delete</button> // THIS DOESN'T WORK YET! */}
                     </field>
                 )}
+                <Calender /> 
             </div>
+            
 
             <div className='field-details-map'>
                 {field && <MapGL fields={field} />}

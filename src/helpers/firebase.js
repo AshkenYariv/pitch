@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, query, where, onSnapshot } from 'firebase/firestore';
+
 
 import {
     getAuth, createUserWithEmailAndPassword,
@@ -22,11 +23,14 @@ initializeApp(firebaseConfig);
 
 //init services
 const db = getFirestore();
-export {db}
+export { db }
 const auth = getAuth();
 export { auth }
 //collection ref
 const fieldRef = collection(db, 'fields');
+const reservationsRef = collection(db, 'reservations');
+const usersRef = collection(db, 'users');
+
 
 
 
@@ -79,3 +83,20 @@ export function logOut() {
 onAuthStateChanged(auth, (user) => {
     console.log('user status changed: ', user)
 })
+
+
+//! trying real time db
+
+
+// const test = query(reservationsRef);
+// const calender = [];
+// export const unsubscribe = onSnapshot(test, (querySnapshot) => {
+//     querySnapshot.docChanges().forEach((doc) => {
+//         console.log(doc['doc'])
+//         calender.push({...doc.doc});
+//     }); 
+//     console.log("Current cities in CA: ", calender.join(", "));
+//     return calender
+// });
+// export {calender}
+
