@@ -31,14 +31,18 @@
 }
 .field-details {
     /* background-color: purple; */
-    margin: 0px 0;
     padding: 3vh;
     text-align: right;
     width: 100%;
-    float: right;
     height: 65vh;
-    margin-left: 5px;
-    margin-right: 70px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+/* Opening hours table */
+.openingHoursTable{
+    float: right;
 }
 /* home styles */
 .field-details-text {
@@ -48,11 +52,10 @@
     font-family: 'Rubik',
         sans-serif;
     text-align: right;
-    width: 35%;
-    float: right;
-    height: 65vh;
     margin-left: 5px;
     margin-right: 70px;
+    display: flex;
+    flex-direction: column;
 }
 .field-details button {
     background: #16e5de;
@@ -68,7 +71,7 @@
 .field-details-map {
     /* background-color: blue; */
     width: 48%;
-    float: left;
+
     height: 70vh;
-    margin-right: 5px;
+    
 }

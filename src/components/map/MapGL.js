@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import './mapGL.css';
-const MapGL = ({fields}) => {
+const MapGL = ({ fields }) => {
 
     const mapContainer = useRef(null)
     const [lng, setLng] = useState(34.7838)
@@ -10,7 +10,7 @@ const MapGL = ({fields}) => {
     const mapGl = useRef(null)
 
     useEffect(() => {
-        
+
         if (mapGl.current) return; // initialize map only once
         // this is overly complicated! Loads diffrent maps according to if 
         // wanting to center in a single location or in a general location
@@ -21,24 +21,25 @@ const MapGL = ({fields}) => {
                 center: [lng, lat],
                 zoom: zoom
             });
-        } else { 
+        } else {
             mapGl.current = new mapboxgl.Map({
                 container: mapContainer.current,
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: [fields.coordinates[0], fields.coordinates[1]],
+                center: [fields.coordinates._lat, fields.coordinates._long],
                 zoom: zoom
             })
         }
         if (Array.isArray(fields)) {
-            fields.map((field) =>
-                new mapboxgl.Marker().setLngLat(field.coordinates).addTo(mapGl.current)
+            fields.map((field) => {
+                new mapboxgl.Marker().setLngLat([field.data.coordinates._lat,field.data.coordinates._long]).addTo(mapGl.current)
+            }
             );
         } else {
-            new mapboxgl.Marker().setLngLat(fields.coordinates).addTo(mapGl.current)
-            setLng({ lng: fields.coordinates[1] })
-            setLat({ lat: fields.coordinates[0] })
+            new mapboxgl.Marker().setLngLat([fields.coordinates._lat,fields.coordinates._long]).addTo(mapGl.current)
+            setLng({ lng: fields.coordinates._long })
+            setLat({ lat: fields.coordinates._lat })
         }
-        
+
     });
 
     useEffect(() => {
@@ -50,11 +51,11 @@ const MapGL = ({fields}) => {
         });
     });
 
-    return ( 
+    return (
         <mapgl className="mapGl">
             <div ref={mapContainer} className="map-container" />
         </mapgl>
-     );
+    );
 }
- 
+
 export default MapGL;

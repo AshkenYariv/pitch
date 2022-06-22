@@ -1,49 +1,46 @@
 import BlogList from './BlogList';
 import { MapGL } from '../../components';
-import useFetch from '../../helpers/useFetch';
-import { useState } from 'react';
-import Select from 'react-select';
+import {  useEffect, useState } from 'react';
 import './home.css';
-
+import useFetchFirestore from '../../helpers/useFetchFirestore';
+import { unsubscribe } from '../../helpers/firebase';
 
 const Home = () => {
-    const { data: fields, isPanding, error } = useFetch('http://localhost:8000/fields')
-
-    const [title, setTitle] = useState('')
+//    const { data: fields, isPending, errortmp } = useFetch('http://localhost:8000/fields')
+    const { data: fields, isPending, error } = useFetchFirestore()
     const [city, setCity] = useState('all')
-    const [author, setAuthor] = useState('mario')
-    const [isPending, setIsPending] = useState(false)
-    // const history = useHistory()
 
-    return ( 
+    
+
+    return (
         <div className="home">
             <div className="search-bar">
                 <form>
                     {!isPending && <button>חפש</button>}
                     {isPending && <button disabled>...מחפש</button>}
-
                     <select value={city}
                         onChange={(e) => setCity(e.target.value)}>
                         <option value='all'>בחר עיר</option>
                         <option value='tel-aviv'>תל אביב</option>
                         <option value='herzliya'>הרצליה</option>
                     </select>
-
                 </form>
             </div>
-          
+            {error && <div>{error}</div>}
+            {isPending && <div>...טוען</div>}
             <div className='homepage-text'>
                 {error && <div>{error}</div>}
-                {isPanding && <div>...טוען</div>}
-                {fields && <BlogList fields={fields.filter((field) => city === 'all' || field.city === city)} title='מגרשים' />}
+                {isPending && <div>...טוען</div>}
+                {fields && <BlogList fields={fields} title='מגרשים' />}
+                {/* {fields && <BlogList fields={fields.filter((field) => city === 'all' || field.data.city === city)} title='מגרשים' />} */}
             </div>
-
+            {console.log(fields)}
             <div className='homepage-map'>
                 {fields && <MapGL fields={fields} />}
             </div>
 
         </div>
-     );
+    );
 }
- 
+
 export default Home;
