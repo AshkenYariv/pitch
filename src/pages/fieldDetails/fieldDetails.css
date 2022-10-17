@@ -72,3 +72,8 @@
     height: 70vh;
     margin-right: 5px;
 }
+
+/* Date and Time picker */
+#datePicker {
+    margin: 5px;
+}

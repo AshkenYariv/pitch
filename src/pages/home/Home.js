@@ -2,18 +2,15 @@ import BlogList from './BlogList';
 import { MapGL } from '../../components';
 import useFetch from '../../helpers/useFetch';
 import { useState } from 'react';
-import Select from 'react-select';
 import './home.css';
 
 
 const Home = () => {
-    const { data: fields, isPanding, error } = useFetch('http://localhost:8000/fields')
+    const { data: fields, isPending, error } = useFetch('http://localhost:8080/fields')
 
     const [title, setTitle] = useState('')
     const [city, setCity] = useState('all')
     const [author, setAuthor] = useState('mario')
-    const [isPending, setIsPending] = useState(false)
-    // const history = useHistory()
 
     return ( 
         <div className="home">
@@ -34,7 +31,7 @@ const Home = () => {
           
             <div className='homepage-text'>
                 {error && <div>{error}</div>}
-                {isPanding && <div>...טוען</div>}
+                {isPending && <div>...טוען</div>}
                 {fields && <BlogList fields={fields.filter((field) => city === 'all' || field.city === city)} title='מגרשים' />}
             </div>
 

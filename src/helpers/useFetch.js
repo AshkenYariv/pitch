@@ -34,11 +34,11 @@ console.log('Fetch Started')
         }, 100)
 
         return () => abortCont.abort()
-    }, [url])
+    },[url])
 
     console.log('Fetch Complete')
 
-    return { data, isPanding, error }
+    return { data, isPending: isPanding, error }
 }
 
 export default useFetch
