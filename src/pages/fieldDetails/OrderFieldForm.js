@@ -6,11 +6,17 @@ import React from 'react';
 import "../../components/general/popup/Popup"
 import Popup from "../../components/general/popup/Popup";
 import PostRequest from "../../helpers/PostRequest";
+import {
+    backend_field_by_id_url,
+    backend_fields_db_url,
+    backend_url,
+    email_template_book_field
+} from "../../helpers/defines";
 
 const OrderFieldForm = ({ field, id }) => {
     // Defines
     const booking_time = "booking_time";
-    const id_url = "http://localhost:8080/fields/id/" + id;
+    const id_url = backend_field_by_id_url + "/" + id;
 
     const form = useRef();
     const currentDate = getCurrentDate();
@@ -28,7 +34,7 @@ const OrderFieldForm = ({ field, id }) => {
         };
         PostRequest(id_url + "/order", postContent)
 
-        sendEmail(form.current)
+        sendEmail(email_template_book_field, form.current)
         e.target.reset();
         setPopupIsOpen(!popupIsOpen);
     };
