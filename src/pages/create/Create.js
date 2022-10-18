@@ -1,20 +1,26 @@
-import { useState, useRef } from 'react'
+import { useRef, useState } from 'react'
 import './create.css';
-import {sendEmail} from "../../helpers/functions";
+import {refreshPage, sendEmail} from "../../helpers/functions";
 import {email_template_add_field} from "../../helpers/defines";
+import Popup from "../../components/general/popup/Popup";
+import React from 'react';
 
 const Create = () => {
     const form = useRef();
-    const [fieldName, setFieldName] = useState('')
-    const [fieldAddress, setFieldAddress] = useState('')
-    const [contactEmail, setContactEmail] = useState('')
-    const [contactPhoneNumber, setContactPhoneNumber] = useState('')
-    const [generalComment, setGeneralComment] = useState('')
+    const [popupIsOpen, setPopupIsOpen] = useState(false);
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         console.log("Sending Email")
         sendEmail(email_template_add_field, form.current)
         console.log("Email Sent")
+        e.target.reset();
+        setPopupIsOpen(!popupIsOpen);
+    }
+
+    const togglePopup = () => {
+        setPopupIsOpen(!popupIsOpen);
+        refreshPage();
     }
 
     return (
@@ -24,27 +30,31 @@ const Create = () => {
             <br/>
             <form ref={form} onSubmit={handleSubmit} id="add-field-form">
                 <label>שם המגרש</label>
-                <input type='text' name="fieldname" required value={ fieldName }
-                       onChange={(e) => setFieldName(e.target.value)} />
+                <input type='text' name="fieldname" />
                 <label>כתובת המגרש</label>
-                <input type='text' name="fieldAddress" required value={ fieldAddress }
-                       onChange={(e) => setFieldAddress(e.target.value)} />
+                <input type='text' name="fieldAddress" />
                 <label>אי-מייל</label>
-                <input type='email' name="contactEmail" required value={ contactEmail }
-                       onChange={(e) => setContactEmail(e.target.value)} />
+                <input type='email' name="contactEmail" />
                 <label>טלפון</label>
-                <input type='text' name="contactPhoneNumber" required value={ contactPhoneNumber }
-                       onChange={(e) => setContactPhoneNumber(e.target.value)} />
+                <input type='text' name="contactPhoneNumber" />
                 <label>הערות</label>
-                <textarea name="generalComment" required value={ generalComment }
-                          onChange={(e) => setGeneralComment(e.target.value)}/>
-
+                <textarea name="generalComment" />
                 <button type="submit" value="Submit">שלח בקשה</button>
 
                 <br/>
                 <br/>
                 <p>טלפון: 055-881-7442</p>
             </form>
+            <div className="pop-up" id="pop-up">
+                {popupIsOpen && <Popup id="pop-up"
+                    content={<>
+                        <b>!בקשה נשלחה</b>
+                        <br/>
+                        <br/>
+                        <button onClick={togglePopup}>סגור</button>
+                    </>}
+                />}
+            </div>
         </div>
     );
 }
